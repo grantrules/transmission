@@ -80,6 +80,8 @@ function Inspector(controller) {
                 updateTrackersPage();
             } else if ($(e.files_page).is(':visible')) {
                 updateFilesPage();
+            } else if ($(e.settings_page).is(':visible')) {
+                updateSettingsPage();
             }
         },
 
@@ -803,6 +805,83 @@ function Inspector(controller) {
 
             setInnerHTML(trackers_list, html.join(''));
         },
+    /****
+     *****  SETTINGS PAGE
+     ****/
+    
+    updateSettingsPage = function() {
+        var torrents = data.torrents,
+        e = data.elements;
+        
+        // loop through each setting. if they have different values, create a field next to
+        // the property and do that setText to add a "Mixed" message
+        
+        if (torrents.length < 1) {
+            str = 'None';
+        } else {
+            var priority_matching, ul_matching, ul_enabled_matching, dl_matching, dl_enabled_matching, seeding_matching, connections_matching;
+            
+            priority_matching, ul_matching, ul_enabled_matching, dl_matching, dl_enabled_matching, seeding_matching, connections_matching = true;
+            var p = torrents[0].getBandwidthPriority();
+            var peerlimit = torrents[0].getMaxConnectedPeers();
+            var tlimits = torrents[0].getTransferLimits();
+            for (i = 0; t = torrents[i]; ++i) {
+                
+                //priority
+                if (p != t.getBandwidthPriority()) {
+                    priority_matching = false;
+                }
+                // transfer limits
+                var j = t.getTransferLimits();
+                
+                // upload limit enabled
+                if (tlimits['upload'][0] != j['upload'][0]) {
+                    ul_enabled_matching = false;
+                }
+                
+                // upload limit in kB/s
+                if (tlimits['upload'][1] != j['upload'][1]) {
+                    ul_matching = false;
+                }
+                
+                // download limit enabled
+                if (tlimits['download'][0] != j['download'][0]) {
+                    dl_enabled_matching = false;
+                }
+                
+                // upload limit in kB/s
+                if (tlimits['download'][1] != j['download'][1]) {
+                    dl_matching = false;
+                }
+            
+                
+                // seed limits (
+                
+                if (seedratiomode != t.getSeedRatioMode()) {
+                    seeding_matching = false;
+                }
+                
+                if (seedidlelimit != t.getSeedIdleMode()) {
+                
+                }
+                /*
+                 },
+                 seedRatioLimit: function (controller) {
+                 switch (this.getSeedRatioMode()) {
+                 */
+                
+                //maximum connections
+                if (peerlimit != t.getMaxConnectedPeers()) {
+                    connections_matching = false;
+                }
+            
+            }
+            
+        }
+        
+        
+        
+    },
 
         initialize = function (controller) {
 
@@ -816,6 +895,7 @@ function Inspector(controller) {
             data.elements.files_page = $('#inspector-page-files')[0];
             data.elements.peers_page = $('#inspector-page-peers')[0];
             data.elements.trackers_page = $('#inspector-page-trackers')[0];
+            data.elements.settings_page = $('#inspector-page-settings')[0];
 
             data.elements.file_list = $('#inspector_file_list')[0];
             data.elements.peers_list = $('#inspector_peers_list')[0];
@@ -844,6 +924,7 @@ function Inspector(controller) {
             updatePeersPage();
             updateTrackersPage();
             updateFilesPage();
+            updateSettingsPage();
         };
 
     /****

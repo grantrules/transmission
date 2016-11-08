@@ -191,7 +191,7 @@
 
 			<div id="inspector-tabs-wrapper">
 			<div id="inspector-tabs">
-				<div class="inspector-tab selected" id="inspector-tab-info" title="Info"><a href="#info"></a></div><div class="inspector-tab" id="inspector-tab-peers" title="Peers"><a href="#peers"></a></div><div class="inspector-tab" id="inspector-tab-trackers" title="Trackers"><a href="#trackers"></a></div><div class="inspector-tab" id="inspector-tab-files" title="Files"><a href="#files"></a></div>
+				<div class="inspector-tab selected" id="inspector-tab-info" title="Info"><a href="#info"></a></div><div class="inspector-tab" id="inspector-tab-peers" title="Peers"><a href="#peers"></a></div><div class="inspector-tab" id="inspector-tab-trackers" title="Trackers"><a href="#trackers"></a></div><div class="inspector-tab" id="inspector-tab-files" title="Files"><a href="#files"></a></div><div class="inspector-tab" id="inspector-tab-settings" title="Settings"><a href="#settings"></a></div>
 			</div><!-- inspector-tabs -->
 			</div><!-- inspector-tabs-wrapper -->
 
@@ -238,6 +238,53 @@
 					<ul id="inspector_file_list">
 					</ul>
 			</div><!-- id="inspector_tab_files_container" -->
+            
+            
+            <div class="inspector-page ui-helper-hidden" id="inspector-page-settings">
+                <div class="prefs-section">
+                    <div class="title">Priority</div>
+                    <div class="row"><div class="key"><label for="transfer-priority">Transfer Priority:</label></div>
+                        <div class="value"><select id="transfer-priority">
+                            <!-- add these guys: file-priority-high.png -->
+                            <option value="-1">Low</option>
+                            <option value="0" selected="selected">Normal</option>
+                            <option value="1">High</option>
+                        </select></div>
+                    </div>
+                </div>
+                
+                <div class="prefs-section">
+                    <div class="title">Transfer Bandwidth</div>
+                    <div class="row"><div class="key"><input type="checkbox" id="transfer-bandwidth-up-enabled"/><label for="transfer-bandwidth-up-enabled">Limit Upload (kB/s):</label></div>
+                        <div class="value"><input type="number" min="0" id="transfer-bandwidth-up"/></div></div>
+                    <div class="row"><div class="key"><input type="checkbox" id="transfer-bandwidth-down-enabled"/><label for="transfer-bandwidth-down-enabled">Limit Download (kB/s):</label></div>
+                        <div class="value"><input type="number" min="0" id="transfer-bandwidth-down"/></div></div>
+                    <div class="row"><div class="key"><input type="checkbox" id="transfer-bandwidth-global-limits"/><label for="ransfer-bandwidth-global-limits">Stay within the global bandwidth limits</label></div><div class="value">&nbsp;</div></div>
+                </div>
+                
+                <div class="prefs-section">
+                    <div class="title">Seeding Limits</div>
+                    <div class="row"><div class="key">Ratio:</div><div class="value"><select id="seed-ratio">
+                        <option value="0">Global Setting</option>
+                        <option value="2">Unlimited</option>
+                        <option value="1">Stop at Ratio</option>
+                        </select>
+                    </div></div>
+                    <div class="row"><div class="key">Inactivity:</div><div class="value"><select id="seed-ratio">
+                        <option value="0">Global Setting</option>
+                        <option value="2">Unlimited</option>
+                        <option value="1">Stop when Inactive</option>
+                        </select>
+                    </div></div>
+                    <!-- remove when complete not available through rpc -->
+                </div>
+                
+                <div class="prefs-section">
+                    <div class="title">Advanced</div>
+                    <div class="row"><div class="key">Maximum connections:</div><div class="value"><input type="number" min="0" id="maximum-connections"/></div></div>
+                </div>
+
+            </div><!-- id="inspector_tab_settings_container" -->
 
 		</div>
 

@@ -542,9 +542,13 @@ div#torrent_inspector
 			}
 
 			> #inspector-tab-files {
-                                @include rightRoundedBox($border-radius);
 				@include buttonImage('images/inspector-files.png', $idle-color-top, $idle-color-bottom, $active-color-top, $active-color-bottom);
 			}
+            > #inspector-tab-settings {
+                @include rightRoundedBox($border-radius);
+                @include buttonImage('images/inspector-settings.png', $idle-color-top, $idle-color-bottom, $active-color-top, $active-color-bottom);
+            }
+
 		}
 	}
 

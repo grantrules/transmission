@@ -29,6 +29,11 @@ Torrent._RatioUseGlobal = 0;
 Torrent._RatioUseLocal = 1;
 Torrent._RatioUnlimited = 2;
 
+// Torrent.fields.seedIdleMode
+Torrent._IdleUseGlobal = 0;
+Torrent._IdleUseLocal = 1;
+Torrent._IdleUnlimited = 2;
+
 // Torrent.fields.error
 Torrent._ErrNone = 0;
 Torrent._ErrTrackerWarning = 1;
@@ -54,12 +59,17 @@ Torrent.Fields.Metadata = [
 
 // commonly used fields which need to be periodically refreshed
 Torrent.Fields.Stats = [
+    'bandwidthPriority',
+    'downloadDir',
+    'downloadLimit',
+    'downloadLimited',
     'error',
     'errorString',
     'eta',
     'isFinished',
     'isStalled',
     'leftUntilDone',
+    'maxConnectedPeers',
     'metadataPercentComplete',
     'peersConnected',
     'peersGettingFromUs',
@@ -69,13 +79,16 @@ Torrent.Fields.Stats = [
     'rateDownload',
     'rateUpload',
     'recheckProgress',
+    'seedIdleMode',
+    'seedIdleLimit',
     'seedRatioMode',
     'seedRatioLimit',
     'sizeWhenDone',
     'status',
     'trackers',
-    'downloadDir',
     'uploadedEver',
+    'uploadLimit',
+    'uploadLimited',
     'uploadRatio',
     'webseedsSendingToUs'
 ];
@@ -205,6 +218,9 @@ Torrent.prototype = {
      ****/
 
     // simple accessors
+    getBandwidthPriority: function () {
+        return this.fields.bandwidthPriority;
+    },
     getComment: function () {
         return this.fields.comment;
     },
@@ -274,6 +290,9 @@ Torrent.prototype = {
     getName: function () {
         return this.fields.name || 'Unknown';
     },
+    getMaxConnectedPeers: function () {
+        return this.fields['maxConnectedPeers'];
+    },
     getPeers: function () {
         return this.fields.peers;
     },
@@ -300,6 +319,12 @@ Torrent.prototype = {
     },
     getRecheckProgress: function () {
         return this.fields.recheckProgress;
+    },
+    getSeedIdleLimit: function () {
+        return this.fields.seedIdleLimit;
+    },
+    getSeedIdleMode: function () {
+        return this.fields.seedIdleMode;
     },
     getSeedRatioLimit: function () {
         return this.fields.seedRatioLimit;
@@ -395,6 +420,16 @@ Torrent.prototype = {
             return 'Error';
         }
     },
+    seedIdleLimit: function (controller) {
+        switch (this.getSeedIdleMode()) {
+            case Torrent._IdleUseGlobal:
+                return controller.seedIdleLimit();
+            case Torrent._IdleUseLocal:
+                return this.getSeedIdleLimit();
+            default:
+                return -1;
+        }
+    },
     seedRatioLimit: function (controller) {
         switch (this.getSeedRatioMode()) {
         case Torrent._RatioUseGlobal:
@@ -404,6 +439,12 @@ Torrent.prototype = {
         default:
             return -1;
         }
+    },
+    getTransferLimits: function() {
+        var limits = [];
+        limits['upload'] = (this.fields.uploadLimited, this.field.uploadLimit);
+        limits['download'] = (this.fields.downloadLimited, this.field.downloadLimit);
+        return limits;
     },
     getErrorMessage: function () {
         var str = this.getErrorString();

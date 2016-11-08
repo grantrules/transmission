@@ -490,10 +490,6 @@ div#torrent_inspector {
           background-position: center;
           background-repeat: no-repeat; }
       div#torrent_inspector #inspector-tabs-wrapper #inspector-tabs > #inspector-tab-files {
-        -moz-border-radius-topright: 5px;
-        -moz-border-radius-bottomright: 5px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
         background-color: #dddddd;
         background-image: url("images/inspector-files.png");
         /* fallback */
@@ -525,6 +521,49 @@ div#torrent_inspector {
           /* Opera 11.10+ */
           background-position: center;
           background-repeat: no-repeat; }
+
+
+
+
+div#torrent_inspector #inspector-tabs-wrapper #inspector-tabs > #inspector-tab-settings {
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #dddddd;
+    background-image: url("images/inspector-settings.png");
+    /* fallback */
+    background-image: url("images/inspector-settings.png"), -webkit-gradient(linear, left top, left bottom, from(white), to(#bbbbbb));
+    /* Saf4+, Chrome */
+    background-image: url("images/inspector-settings.png"), -webkit-linear-gradient(top, white, #bbbbbb);
+    /* Chrome 10+, Saf5.1+ */
+    background-image: url("images/inspector-settings.png"), -moz-linear-gradient(top, white, #bbbbbb);
+    /* FF3.6+ */
+    background-image: url("images/inspector-settings.png"), -ms-linear-gradient(top, white, #bbbbbb);
+    /* IE10 */
+    background-image: url("images/inspector-settings.png"), -o-linear-gradient(top, white, #bbbbbb);
+    /* Opera 11.10+ */
+    background-position: center;
+    background-repeat: no-repeat; }
+div#torrent_inspector #inspector-tabs-wrapper #inspector-tabs > #inspector-tab-settings:active, div#torrent_inspector #inspector-tabs-wrapper #inspector-tabs > #inspector-tab-settings.selected {
+    background-color: #e6e6ff;
+    background-image: url("images/inspector-settings.png");
+    /* fallback */
+    background-image: url("images/inspector-settings.png"), -webkit-gradient(linear, left top, left bottom, from(#cdcdff), to(white));
+    /* Saf4+, Chrome */
+    background-image: url("images/inspector-settings.png"), -webkit-linear-gradient(top, #cdcdff, white);
+    /* Chrome 10+, Saf5.1+ */
+    background-image: url("images/inspector-settings.png"), -moz-linear-gradient(top, #cdcdff, white);
+    /* FF3.6+ */
+    background-image: url("images/inspector-settings.png"), -ms-linear-gradient(top, #cdcdff, white);
+    /* IE10 */
+    background-image: url("images/inspector-settings.png"), -o-linear-gradient(top, #cdcdff, white);
+    /* Opera 11.10+ */
+    background-position: center;
+    background-repeat: no-repeat; }
+
+
+
   div#torrent_inspector #inspector_header {
     margin-top: 8px; }
     div#torrent_inspector #inspector_header #torrent_inspector_name {
@@ -582,8 +621,7 @@ div#torrent_inspector {
     list-style-type: none;
     list-style: none;
     list-style-image: none;
-    clear: both; }
-  div#torrent_inspector li.inspector_torrent_file_list_entry {
+    clear: both; }   div#torrent_inspector li.inspector_torrent_file_list_entry {
     padding: 3px 0 3px 2px;
     display: block; }
     div#torrent_inspector li.inspector_torrent_file_list_entry.skip {
@@ -738,10 +776,6 @@ div.file-priority-radiobox {
       background-position: center;
       background-repeat: no-repeat; }
   div.file-priority-radiobox > div.high {
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-bottomright: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
     background-color: #dcdcdc;
     background-image: url("images/file-priority-high.png");
     /* fallback */
