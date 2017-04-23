@@ -47,6 +47,22 @@ function main() {
 
     // Initialise the main Transmission controller
     transmission = new Transmission();
+    
+    
+    // Set magnet: protocol handler
+    if (navigator.registerProtocolHandler) {
+
+        navigator.registerProtocolHandler('magnet', window.location.origin + '/transmission/web/?magnet=%s', 'Transmission Web');
+
+        var magnet = /#magnet=(.*)/.exec(window.location.href);
+        if (magnet) {
+            magnet = decodeURIComponent(magnet[1]);
+            tranmission.uploadTorrentFile();
+            $('input#torrent_upload_url').attr('value', magnet);
+            window.location.replace("#");
+        }
+    }
+
 };
 
 document.addEventListener("DOMContentLoaded", main);
