@@ -50,9 +50,9 @@ function main() {
     
     
     // Set magnet: protocol handler
-    if (navigator.registerProtocolHandler) {
+    if (window.navigator.registerProtocolHandler) {
 
-        navigator.registerProtocolHandler('magnet', window.location.origin + '/transmission/web/#magnet=%s', 'Transmission Web');
+        window.navigator.registerProtocolHandler('magnet', window.location.origin + '/transmission/web/#magnet=%s', 'Transmission Web');
 
         var magnet = /#magnet=(.*)/.exec(window.location.href);
         if (magnet) {
