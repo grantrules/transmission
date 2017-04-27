@@ -57,7 +57,7 @@ function main() {
         var magnet = /#magnet=(.*)/.exec(window.location.href);
         if (magnet) {
             magnet = decodeURIComponent(magnet[1]);
-            tranmission.uploadTorrentFile();
+            transmission.uploadTorrentFile();
             $('input#torrent_upload_url').attr('value', magnet);
             window.location.replace("#");
         }
